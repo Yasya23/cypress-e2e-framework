@@ -21,9 +21,6 @@ export abstract class BaseApi {
     method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     endpoint: string,
     body?: Cypress.RequestBody,
-    // undefined -> автопідхоплення збереженого токена
-    // null      -> явно без токена (для негативних тестів на авторизацію)
-    // string    -> явно передати конкретний токен
     explicitToken?: string | null,
     expectedStatus = 200,
   ): Cypress.Chainable<Cypress.Response<T>> {
@@ -46,7 +43,7 @@ export abstract class BaseApi {
     };
 
     if (explicitToken === null) {
-      return execute(undefined); // примусово без Authorization
+      return execute(undefined);
     }
 
     if (explicitToken !== undefined) {
