@@ -15,8 +15,8 @@ export class FavoritesPage extends BasePage {
     return cy.getByTestId(`favorite-${id}`);
   }
 
-  deleteProductById(id: string): void {
-    this.getProductCardById(id).getByTestIdWithin('delete').click();
+  getDeleteButtonByProductId(id: string) {
+    return this.getProductCardById(id).getByTestIdWithin('delete');
   }
 }
 
