@@ -1,9 +1,19 @@
 /// <reference types="cypress" />
 
-declare namespace Cypress {
-  interface Chainable<Subject = any> {
-    getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+import { ApiAddedProduct, ProductData } from '@/types/product.type';
 
-    getByTestIdWithin(testId: string): Chainable<JQuery<HTMLElement>>;
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(): Chainable<void>;
+
+      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+      getByTestIdWithin(testId: string): Chainable<JQuery<HTMLElement>>;
+
+      getProductForTesting(): Chainable<ProductData>;
+      getAddedProductToFavorites(): Chainable<ApiAddedProduct>;
+    }
   }
 }
+
+export {};
