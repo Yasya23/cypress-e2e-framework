@@ -12,9 +12,6 @@ module.exports = defineConfig({
     expose: {
       BASE_API_URL: process.env.BASE_API_URL,
     },
-    setupNodeEvents(on, config) {
-      console.log('baseUrl:', config.baseUrl);
-      return config;
-    },
+    setupNodeEvents(on, config) {},
   },
 });
