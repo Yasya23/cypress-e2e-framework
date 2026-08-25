@@ -42,6 +42,15 @@ Feature: Actions with Chosen Product
 
 Feature: Favorite products
 
+  Background:
+    Given the user is on the "Favorites" page
+
+  Scenario: Logged-in user sees added product in favorites list
+    Given the user is logged in
+    And the user has added a product to favorites
+    When the user opens the favorites page
+    Then the added product is displayed in the favorites list
+
   Scenario: Logged-in user removes a product from favorites
     Given the user is logged in
     And the product exists in the favorites list
