@@ -12,6 +12,16 @@ module.exports = defineConfig({
     expose: {
       BASE_API_URL: process.env.BASE_API_URL,
     },
+    reporter: 'cypress-multi-reporters',
+    reporterOptions: {
+      reporterEnabled: 'spec, mochawesome',
+      mochawesomeReporterOptions: {
+        reportDir: 'cypress/reports/html',
+        overwrite: false,
+        html: false, // per-spec HTML skipped; generated once after merge
+        json: true,
+      },
+    },
     setupNodeEvents(on, config) {},
   },
 });
