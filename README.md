@@ -4,6 +4,7 @@ Automated end-to-end (E2E) testing framework built with Cypress, TypeScript, Pag
 
 ## Project Structure
 
+```text
 cypress/
 ├── components/ # Reusable UI component models (e.g., ToastComponent)
 ├── constants/ # Route definitions, API endpoints, error & status messages
@@ -25,6 +26,7 @@ cypress/
 ├── package.json # Project metadata and script commands
 ├── README.md # Project documentation
 └── tsconfig.json # TypeScript compiler configuration
+```
 
 ## Local Installation & Execution
 
