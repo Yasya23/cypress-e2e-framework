@@ -1,15 +1,11 @@
-const createBundler = require('@bahmutov/cypress-esbuild-preprocessor');
-const {
-  createEsbuildPlugin,
-} = require('@badeball/cypress-cucumber-preprocessor/esbuild');
-const {
-  addCucumberPreprocessorPlugin,
-} = require('@badeball/cypress-cucumber-preprocessor');
-require('dotenv').config();
-const { defineConfig } = require('cypress');
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
+import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild';
+import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
+import { defineConfig } from 'cypress';
+import 'dotenv/config';
 
-module.exports = defineConfig({
-  allowCypressEnv: false,
+export default defineConfig({
+  allowCypressEnv: true,
   e2e: {
     baseUrl: process.env.BASE_URL,
     env: {
@@ -20,16 +16,6 @@ module.exports = defineConfig({
       BASE_API_URL: process.env.BASE_API_URL,
     },
     specPattern: 'cypress/e2e/features/**/*.feature',
-    reporter: 'cypress-multi-reporters',
-    reporterOptions: {
-      reporterEnabled: 'spec, mochawesome',
-      mochawesomeReporterOptions: {
-        reportDir: 'cypress/reports/html',
-        overwrite: false,
-        html: false, // per-spec HTML skipped; generated once after merge
-        json: true,
-      },
-    },
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
       on(
