@@ -4,11 +4,11 @@
     "lib": ["es6", "dom"],
     "sourceMap": true,
     "types": ["cypress", "node"],
+    "moduleResolution": "node",
     "paths": {
       "@/*": ["./cypress/*"]
     }
   },
-
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
