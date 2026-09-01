@@ -2,6 +2,7 @@ import { authApi } from '@/support/api/auth.api';
 import { productsApi } from '@/support/api/product.api';
 import { ApiAddedProduct, ProductData } from '@/types/product.type';
 import { favoritesApi } from '@/support/api/favorites.api';
+import { ROUTES } from '@/constants/routes';
 
 Cypress.Commands.add('login', () => {
   cy.env(['USER_EMAIL', 'USER_PASSWORD']).then(
@@ -12,7 +13,7 @@ Cypress.Commands.add('login', () => {
           authApi
             .getToken({ email: USER_EMAIL, password: USER_PASSWORD })
             .then((token) => {
-              cy.visit('/');
+              cy.visit(ROUTES.HOME);
               cy.window().then((win) => {
                 win.localStorage.setItem('auth-token', token);
               });
