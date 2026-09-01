@@ -19,6 +19,11 @@
     "test:ui": "cypress open",
     "test:run": "cypress run",
     "test": "npm run clean:reports && npm run test:run; npm run report:merge && npm run report:generate",
+    "test:smoke": "cypress run --env tags=@smoke",
+    "test:regression": "cypress run --env tags=@regression",
+    "test:auth": "cypress run --env tags=@auth",
+    "test:guest": "cypress run --env tags=@guest",
+    "test:regression-no-guest": "cypress run --env tags='@regression and not @guest'",
     "test:chrome": "npm run clean:reports && cypress run --browser chrome; npm run report:merge && npm run report:generate",
     "test:firefox": "npm run clean:reports && cypress run --browser firefox; npm run report:merge && npm run report:generate",
     "test:edge": "npm run clean:reports && cypress run --browser edge; npm run report:merge && npm run report:generate",
@@ -27,5 +32,10 @@
     "report:generate": "marge cypress/reports/full_report.json --reportDir cypress/reports/html --html true --json false",
     "report:open": "open-cli cypress/reports/html/full_report.html",
     "clean:reports": "rimraf cypress/reports/"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "cypress/e2e/step_definitions/**/*.ts"
+    ]
   }
 }
