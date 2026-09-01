@@ -19,10 +19,9 @@ export class LoginPage extends BasePage {
     cy.visit(ROUTES.LOGIN);
   }
 
-  login({ email, password }: LoginData): void {
+  fillForm({ email, password }: LoginData): void {
     this.emailInput.clear().type(email);
     this.passwordInput.clear().type(password);
-    this.submitButton.click();
   }
 }
 
