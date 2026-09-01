@@ -5,7 +5,7 @@ import { defineConfig } from 'cypress';
 import 'dotenv/config';
 
 export default defineConfig({
-  allowCypressEnv: true,
+  allowCypressEnv: false,
   e2e: {
     baseUrl: process.env.BASE_URL,
     env: {
