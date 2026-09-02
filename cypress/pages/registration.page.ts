@@ -74,11 +74,6 @@ export class RegisterPage extends BasePage {
     if (data.password) this.passwordInput.clear().type(data.password);
     if (data.country) this.countrySelect.select(data.country);
   }
-
-  register(data: RegisterData): void {
-    this.fillForm(data);
-    this.submitButton.click();
-  }
 }
 
 export const registerPage = new RegisterPage();

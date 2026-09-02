@@ -1,27 +1,31 @@
-require('dotenv').config();
-const { defineConfig } = require('cypress');
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
+import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild';
+import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
+import { defineConfig } from 'cypress';
+import 'dotenv/config';
 
-module.exports = defineConfig({
+export default defineConfig({
   allowCypressEnv: false,
   e2e: {
     baseUrl: process.env.BASE_URL,
     env: {
       USER_EMAIL: process.env.USER_EMAIL,
       USER_PASSWORD: process.env.USER_PASSWORD,
+      BASE_API_URL: process.env.BASE_API_URL, // For Github Actions, expose doesn't work
     },
     expose: {
       BASE_API_URL: process.env.BASE_API_URL,
     },
-    reporter: 'cypress-multi-reporters',
-    reporterOptions: {
-      reporterEnabled: 'spec, mochawesome',
-      mochawesomeReporterOptions: {
-        reportDir: 'cypress/reports/html',
-        overwrite: false,
-        html: false, // per-spec HTML skipped; generated once after merge
-        json: true,
-      },
+    specPattern: 'cypress/e2e/features/**/*.feature',
+    async setupNodeEvents(on, config) {
+      await addCucumberPreprocessorPlugin(on, config);
+      on(
+        'file:preprocessor',
+        createBundler({
+          plugins: [createEsbuildPlugin(config)],
+        }),
+      );
+      return config;
     },
-    setupNodeEvents(on, config) {},
   },
 });

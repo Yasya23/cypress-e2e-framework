@@ -1,0 +1,12 @@
+{
+  "stepDefinitions": [
+    "cypress/e2e/step_definitions/**/*.ts",
+    "cypress/e2e/[filepath].ts"
+  ],
+  "html": {
+    "enabled": true,
+    "output": "cypress/reports/cucumber-html-report.html"
+  },
+  "filterSpecs": true,
+  "omitFiltered": true
+}

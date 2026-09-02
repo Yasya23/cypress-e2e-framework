@@ -2,6 +2,8 @@ import { authApi } from '@/support/api/auth.api';
 import { productsApi } from '@/support/api/product.api';
 import { ApiAddedProduct, ProductData } from '@/types/product.type';
 import { favoritesApi } from '@/support/api/favorites.api';
+import { ROUTES } from '@/constants/routes';
+import { STORAGE_KEYS } from '@/constants/auth';
 
 Cypress.Commands.add('login', () => {
   cy.env(['USER_EMAIL', 'USER_PASSWORD']).then(
@@ -12,16 +14,17 @@ Cypress.Commands.add('login', () => {
           authApi
             .getToken({ email: USER_EMAIL, password: USER_PASSWORD })
             .then((token) => {
-              cy.visit('/');
+              cy.visit(ROUTES.HOME);
               cy.window().then((win) => {
-                win.localStorage.setItem('auth-token', token);
+                win.localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
               });
             });
         },
         {
           validate() {
             cy.window().then((win) => {
-              expect(win.localStorage.getItem('auth-token')).to.exist;
+              expect(win.localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN)).to
+                .exist;
             });
           },
           cacheAcrossSpecs: true,

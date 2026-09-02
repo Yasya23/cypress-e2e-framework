@@ -1,3 +1,4 @@
+import { STORAGE_KEYS } from '@/constants/auth';
 export abstract class BaseApi {
   protected get baseUrl(): string {
     return Cypress.expose('BASE_API_URL');
@@ -5,7 +6,7 @@ export abstract class BaseApi {
 
   protected getAuthToken(): Cypress.Chainable<string | undefined> {
     return cy.window().then((win) => {
-      const token = win.localStorage.getItem('auth-token');
+      const token = win.localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
       return token || undefined;
     });
   }

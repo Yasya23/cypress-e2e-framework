@@ -4,11 +4,13 @@
     "lib": ["es6", "dom"],
     "sourceMap": true,
     "types": ["cypress", "node"],
+    "moduleResolution": "node16",
+    "allowSyntheticDefaultImports": true,
+    "module": "Node16",
     "paths": {
       "@/*": ["./cypress/*"]
     }
   },
-
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
