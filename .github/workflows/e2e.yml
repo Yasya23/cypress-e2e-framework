@@ -28,6 +28,7 @@ jobs:
         with:
           install: false
           browser: chrome
+          headed: true
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
           BASE_API_URL: ${{ secrets.BASE_API_URL }}
