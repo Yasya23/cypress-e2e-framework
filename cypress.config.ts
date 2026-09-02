@@ -11,6 +11,7 @@ export default defineConfig({
     env: {
       USER_EMAIL: process.env.USER_EMAIL,
       USER_PASSWORD: process.env.USER_PASSWORD,
+      BASE_API_URL: process.env.BASE_API_URL, // For Github Actions, expose doesn't work
     },
     expose: {
       BASE_API_URL: process.env.BASE_API_URL,
