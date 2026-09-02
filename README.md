@@ -1,6 +1,8 @@
-# Cypress Automated E2E & API Test Suite
+# Cypress Cucumber BDD E2E & API Test Suite
 
-Automated end-to-end (E2E) testing framework built with Cypress, TypeScript, Page Object Model (POM), and API Object Model (AOM).
+Automated end-to-end (E2E) testing framework built with Cypress, TypeScript, Cucumber BDD (Gherkin syntax), Page Object Model (POM), and API Object Model (AOM).
+
+> **Note on Architecture:** This branch contains the **Cucumber BDD** implementation featuring `.feature` files, tag-based execution, and automated HTML reporting. For the standard Cypress version (`.cy.ts` specs), see the `main`.
 
 ## Project Structure
 
@@ -9,7 +11,9 @@ cypress/
 ├── components/ # Reusable UI component models (e.g., ToastComponent)
 ├── constants/ # Route definitions, API endpoints, error & status messages
 ├── data/ # Static data and dynamic test data generators
-├── e2e/ # E2E test spec files (e.g., auth, favorites, product actions)
+├── e2e/
+│   ├── features/         # BDD Gherkin feature files (.feature)
+│   └── step_definitions/ # Step definition files mapping Gherkin steps to Cypress actions
 ├── pages/ # Page Object Model (POM) classes extending BasePage
 ├── support/
 │ ├── api/ # API Object Model classes (AuthApi, FavoritesApi, ProductsApi)
@@ -18,8 +22,8 @@ cypress/
 │ └── index.d.ts # TypeScript type definitions for custom commands
 ├── types/ # TypeScript interfaces (Auth, Product, API types)
 ├── utils/ # Utility helper functions (generators, formatters)
+├── .cypress-cucumber-preprocessorrc.json # Configuration for Cucumber preprocessor (step definitions path, HTML report settings)
 ├── .gitignore # Git ignore settings
-├── BDD_scenarios.md # BDD feature files and scenario definitions
 ├── cypress.config.ts # Main Cypress configuration file
 ├── env-template.md # Template for required environment variables
 ├── package-lock.json # Dependency lockfile
@@ -50,12 +54,25 @@ cp .env-template.md .env
 
 4. Run the test suite:
 
+Execute all BDD scenarios:
+
 ```bash
 npm run test
 ```
 
+Execute specific test suites using tags:
+
+```bash
+npm run test:smoke      # Runs scenarios tagged with @smoke
+npm run test:favorites  # Runs scenarios tagged with @favorites
+npm run test:guest      # Runs scenarios tagged with @guest
+```
+
 ## Key Features
 
-- **Session Management:** Uses `cy.session()` to cache API authentication tokens across specs, reducing test execution duration.
-- **State Management via API:** State initialization (such as resetting favorites or seeding test products) is executed directly through API services to maintain fast and isolated tests.
-- **Resilient Element Selection:** Utilizes custom `cy.getByTestId()` commands targeting `data-test` attributes to prevent brittle DOM-dependent selectors.
+- **Behavior-Driven Development (BDD):** Uses `@badeball/cypress-cucumber-preprocessor` and Gherkin syntax (`.feature` files) to bridge the gap between technical implementation and business requirements.
+- **Tag-Based Test Execution:** Supports scenario filtering via tags (e.g., `@smoke`, `@favorites`, `@guest`), allowing targeted runs locally and in CI pipelines.
+- **Automated HTML Reporting:** Generates detailed execution reports outputting directly to `cypress/reports/cucumber-html-report.html`.
+- **Session Management:** Caches API authentication tokens via `cy.session()` across scenarios to optimize execution speed.
+- **State Management via API:** Pre-conditions (clearing favorites, seeding test data) execute directly through API services to maintain fast, isolated tests.
+- **Resilient Element Selection:** Utilizes custom `cy.getByTestId()` commands targeting `data-test` attributes to eliminate brittle DOM-dependent selectors.
