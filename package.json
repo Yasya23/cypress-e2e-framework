@@ -14,7 +14,7 @@
     "clean:reports": "rimraf cypress/reports",
     "test:ui": "cypress open",
     "test": "cypress run",
-    "test:guest": "cypress run --expose tags='@favorites'",
+    "test:guest": "cypress run --expose tags='@guest'",
     "test:smoke": "cypress run --expose tags='@smoke'",
     "test:auth": "cypress run --expose tags='@auth'",
     "test:regression": "cypress run --expose tags='@regression'",
