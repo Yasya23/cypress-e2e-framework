@@ -4,7 +4,7 @@ Automated end-to-end (E2E) testing framework built with Cypress, TypeScript, Pag
 
 > **Implementation Versions**
 > * **Standard Cypress (Main Branch):** Standard `.cy.ts` specs using Page Object Model and direct Cypress assertions.
-> * **Cucumber BDD Version (PR #3):** Feature-based tests using Gherkin syntax (`.feature` files), and tag-based filtering. See [Pull Request #3: Cucumber BDD Migration](https://github.com/Yasya23/cypress-e2e-framework/pull/3) for full details, architecture changes, and CI workflow.
+> * **Cucumber BDD Version:** Feature-based tests using Gherkin syntax (`.feature` files), tag-based filtering, and HTML reporting. Switch directly to the [`cucumber_integration`](https://github.com/Yasya23/cypress-e2e-framework/tree/cucumber_integration) branch or see [Pull Request #3: Cucumber BDD Migration](https://github.com/Yasya23/cypress-e2e-framework/pull/3) for full architecture details and CI workflow.
 
 ---
 
