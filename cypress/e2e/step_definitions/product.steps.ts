@@ -18,7 +18,7 @@ Then('a confirmation message is displayed', () => {
     .and('contain.text', MESSAGES.PRODUCT_PAGE.PRODUCT_ADDED_TO_FAVORITES);
 });
 
-Given('the user is viewing a product', () => {
+Given('the guest user is viewing a product', () => {
   cy.getProductForTesting().then((product) => {
     productPage.navigate(product.id);
   });
