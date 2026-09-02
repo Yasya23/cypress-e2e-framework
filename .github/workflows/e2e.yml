@@ -25,7 +25,8 @@ jobs:
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v7
-        run: npm run test
+        with:
+          command: npm run test
 
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
