@@ -10,7 +10,5 @@ Given("the user's favorites list is cleared", () => {
 });
 
 Given('the user is not logged in', () => {
-  cy.clearAllCookies();
-  cy.clearAllLocalStorage();
-  cy.clearAllSessionStorage();
+  cy.clearLocalStorage('auth-token');
 });
